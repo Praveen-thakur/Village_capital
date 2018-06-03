@@ -1,0 +1,472 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0",
+    "title": "VillageCapital [Predictive Exp.]",
+    "description": "No description provided for this web service.",
+    "x-endpoint-name": "default",
+    "x-endpoint-ismultirow": false
+  },
+  "host": "ussouthcentral.services.azureml.net:443",
+  "basePath": "/workspaces/143dbc62952446d2a9b356de19ede308/services/fc537b17db98437ab508ba9502020ae4",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/swagger.json": {
+      "get": {
+        "summary": "Get swagger API document for the web service",
+        "operationId": "getSwaggerDocument",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "API version",
+            "required": false,
+            "type": "string",
+            "default": "2.0",
+            "enum": [
+              "2.0"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Swagger API document for this service"
+          }
+        }
+      }
+    },
+    "/execute?api-version=2.0&format=swagger": {
+      "post": {
+        "summary": "Execute the web service and get a response synchronously",
+        "operationId": "execute",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Execution request",
+            "schema": {
+              "$ref": "#/definitions/ExecutionRequest"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2.0"
+            ]
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The format of the input to the web service",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "swagger"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution results",
+            "schema": {
+              "$ref": "#/definitions/ExecutionResults"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/jobs?api-version=2.0": {
+      "post": {
+        "summary": "Submit an asynchronous job to execute the web service",
+        "operationId": "submitjob",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Batch execution request",
+            "schema": {
+              "$ref": "#/definitions/BatchExecutionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The ID of submitted job",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/jobs/{jobId}?api-version=2.0": {
+      "get": {
+        "summary": "Get the status for a give job",
+        "operationId": "getjobstatus",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "job id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "job status",
+            "schema": {
+              "$ref": "#/definitions/BatchExecutionStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Cancel a job",
+        "operationId": "canceljob",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "job id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The job is successfully cancelled"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/jobs/{jobId}/start?api-version=2.0": {
+      "post": {
+        "summary": "Start running a job",
+        "operationId": "startjob",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "job id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The job is successfully started"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ExecutionRequest": {
+      "title": "Execution request",
+      "properties": {
+        "Inputs": {
+          "$ref": "#/definitions/ExecutionInputs"
+        },
+        "GlobalParameters": {
+          "$ref": "#/definitions/GlobalParameters"
+        }
+      },
+      "example": {
+        "Inputs": {
+          "input1": [
+            {
+              "age": 39,
+              "education": "Bachelors",
+              "marital": "Never-married",
+              "occupation": "Govt_job",
+              "sex": "Male",
+              "Purpose": "small_business",
+              "Loan_amt": 567520.327
+            },
+            {
+              "age": 50,
+              "education": "Bachelors",
+              "marital": "Married",
+              "occupation": "farming",
+              "sex": "Male",
+              "Purpose": "credit_card",
+              "Loan_amt": 554107.1275
+            },
+            {
+              "age": 38,
+              "education": "Bachelors",
+              "marital": "Divorced",
+              "occupation": "Skilled_labour",
+              "sex": "Male",
+              "Purpose": "small_business",
+              "Loan_amt": 50000.0
+            },
+            {
+              "age": 53,
+              "education": "High_school",
+              "marital": "Married",
+              "occupation": "Skilled_labour",
+              "sex": "Male",
+              "Purpose": "small_business",
+              "Loan_amt": 567520.327
+            },
+            {
+              "age": 28,
+              "education": "Bachelors",
+              "marital": "Married",
+              "occupation": "priv_business",
+              "sex": "Female",
+              "Purpose": "credit_card",
+              "Loan_amt": 564986.612
+            }
+          ]
+        },
+        "GlobalParameters": {}
+      }
+    },
+    "ExecutionResults": {
+      "title": "Execution Results",
+      "properties": {
+        "Results": {
+          "$ref": "#/definitions/ExecutionOutputs"
+        }
+      }
+    },
+    "BatchExecutionRequest": {
+      "title": "Batch execution request",
+      "properties": {
+        "GlobalParameters": {
+          "$ref": "#/definitions/GlobalParameters"
+        },
+        "Inputs": {
+          "$ref": "#/definitions/BatchInputs"
+        },
+        "Outputs": {
+          "$ref": "#/definitions/BatchOutputs"
+        }
+      }
+    },
+    "AzureBlobDataReference": {
+      "title": "Azure blob data reference",
+      "properties": {
+        "BaseLocation": {
+          "type": "string"
+        },
+        "ConnectionString": {
+          "type": "string"
+        },
+        "RelativeLocation": {
+          "type": "string"
+        },
+        "SasBlobToken": {
+          "type": "string"
+        }
+      }
+    },
+    "BatchExecutionStatus": {
+      "title": "Batch execution status",
+      "properties": {
+        "StatusCode": {
+          "description": "job status code",
+          "type": "string",
+          "default": "NotStarted",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Cancelled",
+            "Finished"
+          ]
+        },
+        "Results": {
+          "type": "object"
+        },
+        "Details": {
+          "type": "string"
+        }
+      }
+    },
+    "GlobalParameters": {
+      "title": "Global parameters definition",
+      "type": "object"
+    },
+    "ExecutionInputs": {
+      "title": "Execution inputs defintion",
+      "properties": {
+        "input1": {
+          "items": {
+            "$ref": "#/definitions/input1Item"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ExecutionOutputs": {
+      "title": "Execution outputs defintion",
+      "properties": {
+        "output1": {
+          "items": {
+            "$ref": "#/definitions/output1Item"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "BatchInputs": {
+      "title": "Batch inputs defintion",
+      "properties": {
+        "input1": {
+          "$ref": "#/definitions/AzureBlobDataReference"
+        }
+      },
+      "type": "object"
+    },
+    "BatchOutputs": {
+      "title": "Batch outputs defintion",
+      "properties": {
+        "output1": {
+          "$ref": "#/definitions/AzureBlobDataReference"
+        }
+      },
+      "type": "object"
+    },
+    "input1Item": {
+      "required": [
+        "age",
+        "education",
+        "marital",
+        "occupation",
+        "sex",
+        "Purpose",
+        "Loan_amt"
+      ],
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "education": {
+          "type": "string"
+        },
+        "marital": {
+          "type": "string"
+        },
+        "occupation": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "string"
+        },
+        "Purpose": {
+          "type": "string"
+        },
+        "Loan_amt": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "output1Item": {
+      "required": [
+        "age",
+        "education",
+        "marital",
+        "occupation",
+        "sex",
+        "Purpose",
+        "Loan_amt",
+        "Scored Probabilities for Class \"NO\"",
+        "Scored Probabilities for Class \"YES\"",
+        "Scored Labels"
+      ],
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "education": {
+          "type": "string"
+        },
+        "marital": {
+          "type": "string"
+        },
+        "occupation": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "string"
+        },
+        "Purpose": {
+          "type": "string"
+        },
+        "Loan_amt": {
+          "type": "number",
+          "format": "double"
+        },
+        "Scored Probabilities for Class \"NO\"": {
+          "type": "number",
+          "format": "double"
+        },
+        "Scored Probabilities for Class \"YES\"": {
+          "type": "number",
+          "format": "double"
+        },
+        "Scored Labels": {
+          "type": "string",
+          "enum": [
+            "NO",
+            "YES"
+          ]
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "lY8j7f8Oie4i8pvwYm+dIPTIZob2iajMKZLOdHIHAcjGjpUqj1GZuVbyfPdEwOdc2eyXPVWflfEmGB+luRNfRg==",
+      "description": "For example: Bearer abc123",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
